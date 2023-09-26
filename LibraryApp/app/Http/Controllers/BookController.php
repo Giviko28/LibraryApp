@@ -12,7 +12,7 @@ class BookController extends Controller
 {
     public function index()
     {
-        return view('dashboard', [
+        return view('dashboard-books', [
             'books' => Book::all(),
             'authors' => Author::all()
         ]);

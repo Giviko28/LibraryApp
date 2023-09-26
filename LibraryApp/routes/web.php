@@ -22,9 +22,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', [BookController::class, 'index'])
+Route::get('/dashboard/books', [BookController::class, 'index'])
     ->middleware(['admin'])
     ->name('dashboard');
+
 Route::post('/dashboard/books/create', [BookController::class, 'create'])
     ->middleware(['admin']);
 //Route::get('/dashboard', function () {
