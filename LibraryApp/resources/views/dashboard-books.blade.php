@@ -77,8 +77,9 @@
         </div>
         <!-- Forma -->
         <div x-show="open" class="my-4 p-4 bg-white rounded">
-            <div class="pb-2">
+            <div class="pb-2 flex justify-between">
                 <img x-on:click="open = !open" src="{{ asset("png/arrow.png") }}" alt="Arrow icon" class="cursor-pointer">
+                <button type="button" id="add_author">Add author</button>
             </div>
             <div>
                 @if ($errors->any())
@@ -96,13 +97,12 @@
                 <x-text-input name="title" class="block" placeholder="Enter the book title" />
                 <x-text-input type="number" name="release_date" class="block" placeholder="Release date" />
                 <div id="authors">
-                    <div class="flex">
-                        <select name="authors[]" id="authorList" class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    <div id="authorList" class="flex">
+                        <select name="authors[]" class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                             @foreach($authors as $author)
                                 <option value="{{ $author->id }}">{{ $author->name }}</option>
                             @endforeach
                         </select>
-                        <button type="button" id="add_author" class="">+</button>
                     </div>
                 </div>
                 <label class="relative inline-flex items-center mb-4 cursor-pointer">

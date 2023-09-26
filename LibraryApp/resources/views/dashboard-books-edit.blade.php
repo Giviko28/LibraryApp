@@ -31,9 +31,10 @@
                                 <option value="{{ $allAuthors->id }}">{{ $allAuthors->name }}</option>
                             @endforeach
                         </select>
+                        <button class="delete-button" id="delete">Delete</button>
                     @endforeach
-                    <div class="flex">
-                        <select name="authors[]" id="authorList" class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    <div id="authorList" class="flex">
+                        <select name="authors[]" class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                             <option selected disabled>Select an author</option>
                             @foreach($authors as $author)
                                 <option value="{{ $author->id }}">{{ $author->name }}</option>
