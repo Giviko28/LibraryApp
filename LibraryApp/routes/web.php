@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Book;
@@ -25,6 +26,10 @@ Route::get('/', function () {
 Route::get('/dashboard/books', [BookController::class, 'index'])
     ->middleware(['admin'])
     ->name('dashboard');
+
+Route::get('/dashboard/authors', [AuthorController::class, 'index'])
+    ->middleware(['admin'])
+    ->name('authors');
 
 Route::post('/dashboard/books/create', [BookController::class, 'create'])
     ->middleware(['admin']);

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Book extends Model
 {
@@ -11,6 +12,28 @@ class Book extends Model
 
     protected $guarded = [];
     protected $with = ['authors'];
+
+
+    public static function savePivot(array $authors, Book $book)
+    {
+        foreach($authors as $author) {
+            DB::table('book_author')->insert([
+                ['book_id' => $book->id, 'author_id' => $author]
+            ]);
+        }
+    }
+
+    public function scopeFilter($query, $search)
+    {
+        $query->when($search, function ($q) use ($search) {
+            $q->where(function ($query) use ($search) {
+                $query->where('title', 'like', '%' . $search . '%')
+                    ->orWhereHas('authors', function ($subQuery) use ($search) {
+                        $subQuery->where('name', 'like', '%' . $search . '%');
+                    });
+            });
+        });
+    }
 
     public function authors()
     {

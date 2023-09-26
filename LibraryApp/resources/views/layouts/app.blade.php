@@ -23,7 +23,7 @@
                             <x-header-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                                 Books
                             </x-header-link>
-                            <x-header-link :href="route('dashboard')" :active="request()->routeIs('authors')">
+                            <x-header-link :href="route('authors')" :active="request()->routeIs('authors')">
                                 Authors
                             </x-header-link>
                         </div>

@@ -10,10 +10,14 @@ use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $data = $request->validate([
+            'search' => ['string', 'max:255']
+        ]);
+
         return view('dashboard-books', [
-            'books' => Book::all(),
+            'books' => Book::latest()->filter($data['search'] ?? null)->get(),
             'authors' => Author::all()
         ]);
     }
@@ -24,14 +28,10 @@ class BookController extends Controller
         $book = Book::create([
             'title' => $data['title'],
             'release_date' => $data['release_date'],
-            'status' => $data['status']
+            'status' => $data['status'] ?? 0
         ]);
 
-        foreach($data['authors'] as $author) {
-            DB::table('book_author')->insert([
-               ['book_id' => $book->id, 'author_id' => $author]
-            ]);
-        }
+        Book::savePivot($data['authors'], $book);
 
         return back()->with('message', 'Book added successfully');
     }
