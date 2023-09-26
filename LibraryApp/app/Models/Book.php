@@ -23,6 +23,12 @@ class Book extends Model
         }
     }
 
+    public static function updatePivot(array $authors, Book $book)
+    {
+        DB::table('book_author')->where('book_id', $book->id)->delete();
+        self::savePivot($authors, $book);
+    }
+
     public function scopeFilter($query, $search)
     {
         $query->when($search, function ($q) use ($search) {

@@ -27,9 +27,26 @@ Route::get('/dashboard/books', [BookController::class, 'index'])
     ->middleware(['admin'])
     ->name('dashboard');
 
+Route::get('/dashboard/books/{book}/edit', [BookController::class, 'edit'])
+    ->middleware(['admin'])
+    ->name('books.edit');
+
+Route::patch('/dashboard/books/{book}', [BookController::class, 'update'])
+    ->middleware(['admin'])
+    ->name('books.update');
+
+Route::delete('/dashboard/books/{book}', [BookController::class, 'destroy'])
+    ->middleware(['admin'])
+    ->name('books.destroy');
+
 Route::get('/dashboard/authors', [AuthorController::class, 'index'])
     ->middleware(['admin'])
     ->name('authors');
+
+Route::post('/dashboard/authors/create', [AuthorController::class, 'create'])
+    ->middleware(['admin'])
+    ->name('authors.create');
+
 
 Route::post('/dashboard/books/create', [BookController::class, 'create'])
     ->middleware(['admin']);

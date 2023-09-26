@@ -35,4 +35,32 @@ class BookController extends Controller
 
         return back()->with('message', 'Book added successfully');
     }
+    public function destroy(Book $book)
+    {
+        $book->delete();
+
+        return back()->with('message', 'Book deleted succesfully');
+    }
+
+    public function edit(Book $book)
+    {
+        return view('dashboard-books-edit', [
+            'book' => $book,
+            'authors' => Author::latest()->get()
+        ]);
+    }
+
+    public function update(CreateBookRequest $request, Book $book)
+    {
+        $data = $request->validated();
+        $book->update([
+          'title' => $data['title'],
+          'release_date' => $data['release_date'],
+          'status' => $data['status'] ?? 0
+        ]);
+
+        Book::updatePivot($data['authors'], $book);
+
+        return back()->with('message', 'Book edited successfully');
+    }
 }
