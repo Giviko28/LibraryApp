@@ -42,6 +42,7 @@ class BookController extends Controller
         return back()->with('message', 'Book deleted succesfully');
     }
 
+
     public function edit(Book $book)
     {
         return view('dashboard-books-edit', [

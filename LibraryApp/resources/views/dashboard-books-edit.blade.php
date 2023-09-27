@@ -8,7 +8,7 @@
             </div>
             <div>
                 @if ($errors->any())
-                    <div class="alert alert-danger">
+                    <div>
                         <ul>
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -17,21 +17,22 @@
                     </div>
                 @endif
             </div>
-            <form action="{{ route('books.update', ['book' => $book]) }}" method="POST" class="space-y-2">
+            <form  id="book-update" action="{{ route('books.update', ['book' => $book]) }}" method="POST" class="space-y-2">
                 @csrf
                 @method('PATCH')
-                <x-text-input name="title" class="block" placeholder="Enter the book title" value="{{ $book->title }}" />
-                <x-text-input type="number" name="release_date" class="block" placeholder="Release date" value="{{ $book->release_date }}" />
+                <x-text-input id="title" name="title" class="block" placeholder="Enter the book title" value="{{ $book->title }}" />
+                <x-text-input id="release_date" type="number" name="release_date" class="block" placeholder="Release date" value="{{ $book->release_date }}" />
                 <div id="authors">
-                    @foreach($book->authors as $author)
-                        <select name="authors[]" id="oldAuthors" class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                            <option value=""></option>
-                            <option selected value="{{ $author->id }}">{{ $author->name }}</option>
-                            @foreach($authors as $allAuthors)
-                                <option value="{{ $allAuthors->id }}">{{ $allAuthors->name }}</option>
-                            @endforeach
-                        </select>
-                        <button class="delete-button" id="delete">Delete</button>
+                    @foreach($book->authors as $index => $author)
+                        <div>
+                            <select name="authors[]" id="oldAuthors" class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                <option selected value="{{ $author->id }}">{{ $author->name }}</option>
+                                @foreach($authors as $allAuthors)
+                                    <option value="{{ $allAuthors->id }}">{{ $allAuthors->name }}</option>
+                                @endforeach
+                            </select>
+                            <button type="button" id="select{{ $index+1 }}">Delete</button>
+                        </div>
                     @endforeach
                     <div id="authorList" class="flex">
                         <select name="authors[]" class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">

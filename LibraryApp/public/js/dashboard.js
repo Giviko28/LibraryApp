@@ -1,13 +1,19 @@
 let selectCount = 1;
-const deleteButtons = document.querySelectorAll(".delete-button");
 
-deleteButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-        // Get the parent div of the clicked "Delete" button and remove it
+// const axiosClient = axios.create({
+//     baseURL: '/api'
+// });
+
+const authorCount = document.querySelectorAll('#oldAuthors').length;
+
+for(let i = 1; i<authorCount; i++) {
+    const selector = `#select${i}`;
+    const button = document.querySelector(selector);
+    button.addEventListener('click', () => {
         const parentDiv = button.parentElement;
         parentDiv.remove();
-    });
-});
+    })
+};
 
 document.getElementById("add_author").addEventListener("click", function () {
     const authorsDiv = document.getElementById("authors");
@@ -30,3 +36,20 @@ document.getElementById("add_author").addEventListener("click", function () {
 
     selectCount++;
 });
+
+// const deleteAuthor = (book) => {
+//     const form = document.querySelector('#book-update');
+//     const formData = new FormData(form);
+//     const data = {};
+//     formData.forEach((value, key) => {
+//         data[key] = value;
+//     });
+//
+//     axiosClient.post(`/dashboard/books/${book}/update`, data)
+//         .then(response => {
+//             console.log(response);
+//         })
+//         .catch(error => {
+//             console.error(error);
+//         })
+// }

@@ -39,6 +39,7 @@ Route::delete('/dashboard/books/{book}', [BookController::class, 'destroy'])
     ->middleware(['admin'])
     ->name('books.destroy');
 
+
 Route::get('/dashboard/authors', [AuthorController::class, 'index'])
     ->middleware(['admin'])
     ->name('authors');
