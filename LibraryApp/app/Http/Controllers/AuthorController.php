@@ -9,8 +9,15 @@ class AuthorController extends Controller
 {
     public function index()
     {
-        return view('dashboard-authors', [
+        return view('dashboard.authors', [
             'authors' => Author::latest()->get()
+        ]);
+    }
+    public function show(Author $author)
+    {
+        return view('dashboard.author-show', [
+           'author' => $author,
+           'books' => $author->books
         ]);
     }
     public function create(Request $request)

@@ -1,3 +1,8 @@
+const main = document.querySelector('#main');
+window.addEventListener('load', () => {
+    main.classList.toggle('hidden');
+});
+
 let selectCount = 1;
 
 // const axiosClient = axios.create({
@@ -26,6 +31,7 @@ document.getElementById("add_author").addEventListener("click", function () {
     const deleteButton = document.createElement("button");
     deleteButton.type = "button";
     deleteButton.textContent = "X";
+    deleteButton.className = 'pl-8';
     deleteButton.addEventListener("click", function () {
         newAuthorDiv.remove();
     });
@@ -36,6 +42,7 @@ document.getElementById("add_author").addEventListener("click", function () {
 
     selectCount++;
 });
+
 
 // const deleteAuthor = (book) => {
 //     const form = document.querySelector('#book-update');

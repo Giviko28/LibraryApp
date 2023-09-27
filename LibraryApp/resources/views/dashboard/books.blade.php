@@ -2,7 +2,7 @@
 
 <x-app-layout>
     <!-- main  -->
-    <div x-data="{ open: false }" class="w-full flex justify-center">
+    <div x-data="{ open: false }" class="w-full flex justify-center hidden" id="main">
         <!-- Magida -->
         <div x-show="!open" class="max-w-6xl py-4">
             <div class="p-4 bg-gray-50  relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -22,57 +22,39 @@
                 </div>
             </div>
             <div>
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Title
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Authors
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Release Date
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Availability
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Action
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <x-table>
+                    <x-slot name="thead">
+                        <x-table-header>Title</x-table-header>
+                        <x-table-header>Authors</x-table-header>
+                        <x-table-header>Release Date</x-table-header>
+                        <x-table-header>Availability</x-table-header>
+                        <x-table-header>Action</x-table-header>
+                    </x-slot>
+                    <!-- Table body --->
                     @if($books)
                         @foreach($books as $book)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $book->title }}
-                                </th>
-                                <td class="px-6 py-4">
+                                <x-table-data scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $book->title }}</x-table-data>
+                                <x-table-data>
                                     @foreach($book->authors as $author)
                                         <a href="/dashboard/authors/{{ $author->id }}">{{ $author->name }}</a>
                                     @endforeach
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ $book->release_date }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ $book->status ? "Yes" : "No" }}
-                                </td>
-                                <td class="px-6 py-4 space-x-1.5 flex">
+                                </x-table-data>
+                                <x-table-data>{{ $book->release_date }}</x-table-data>
+                                <x-table-data>{{ $book->status ? "Yes" : "No" }}</x-table-data>
+                                <x-table-data class="flex space-x-2">
                                     <a href="{{ route('books.edit', ['book' => $book]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                                     <form method="POST" action="{{ route('books.destroy', ['book' => $book]) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
                                     </form>
-                                </td>
+                                </x-table-data>
                             </tr>
                         @endforeach
                     @endif
-                    </tbody>
-                </table>
+                    <!-- end of table body -->
+                </x-table>
             </div>
         </div>
         <!-- Forma -->
@@ -105,11 +87,7 @@
                         </select>
                     </div>
                 </div>
-                <label class="relative inline-flex items-center mb-4 cursor-pointer">
-                    <input name="status" type="checkbox" value="1" class="sr-only peer">
-                    <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                    <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Available</span>
-                </label>
+                <x-toggle-switch isChecked="{{ false }}">Is the book still available?</x-toggle-switch>
                 <button type="submit" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
             </form>
         </div>

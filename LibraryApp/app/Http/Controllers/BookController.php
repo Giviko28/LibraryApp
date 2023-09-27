@@ -16,7 +16,7 @@ class BookController extends Controller
             'search' => ['string', 'max:255']
         ]);
 
-        return view('dashboard-books', [
+        return view('dashboard.books', [
             'books' => Book::latest()->filter($data['search'] ?? null)->get(),
             'authors' => Author::all()
         ]);
@@ -45,7 +45,7 @@ class BookController extends Controller
 
     public function edit(Book $book)
     {
-        return view('dashboard-books-edit', [
+        return view('dashboard.books-edit', [
             'book' => $book,
             'authors' => Author::latest()->get()
         ]);

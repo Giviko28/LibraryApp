@@ -44,6 +44,10 @@ Route::get('/dashboard/authors', [AuthorController::class, 'index'])
     ->middleware(['admin'])
     ->name('authors');
 
+Route::get('/dashboard/authors/{author}', [AuthorController::class, 'show'])
+    ->middleware(['admin'])
+    ->name('authors.show');
+
 Route::post('/dashboard/authors/create', [AuthorController::class, 'create'])
     ->middleware(['admin'])
     ->name('authors.create');
