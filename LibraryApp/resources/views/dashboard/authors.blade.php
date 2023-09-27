@@ -45,17 +45,9 @@
             <div class="pb-2">
                 <img x-on:click="open = !open" src="{{ asset("png/arrow.png") }}" alt="Arrow icon" class="cursor-pointer">
             </div>
-            <div>
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-            </div>
+
+            <x-error-message/>
+
             <form action="{{ route('authors.create') }}" method="POST" class="space-y-2 flex flex-col justify-center">
                 @csrf
                 <x-text-input name="name" class="block" placeholder="Enter the authors name" />

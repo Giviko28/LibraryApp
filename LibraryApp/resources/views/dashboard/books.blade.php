@@ -63,17 +63,9 @@
                 <img x-on:click="open = !open" src="{{ asset("png/arrow.png") }}" alt="Arrow icon" class="cursor-pointer">
                 <button type="button" id="add_author">Add author</button>
             </div>
-            <div>
-                @if ($errors->any())
-                    <div>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-            </div>
+
+            <x-error-message/>
+
             <form action="/dashboard/books/create" method="POST" class="space-y-2">
                 @csrf
                 <x-text-input name="title" class="block w-full" placeholder="Enter the book title" />
