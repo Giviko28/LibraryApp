@@ -17,11 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome', [
-        'books' => null
-    ]);
-});
+Route::view('/', 'welcome', ['books' => null]);
+
 
 Route::group(['middleware' => 'admin', 'prefix' => '/dashboard'], function() {
     Route::get('/books', [BookController::class, 'index'])->name('dashboard');

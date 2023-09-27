@@ -21,10 +21,12 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 sm:items-center py-4 sm:pt-0">
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+    <div class="relative flex items-top justify-center min-h-screen bg-gray-100 sm:items-center py-4 sm:pt-0">
+            <p class="fixed top-2 left-4">Psst, this page has no intentions, so just log in as an admin!</p>
+            <div class="sm:fixed top-0 right-0 px-6 py-4 flex">
                     @if (auth()->user() && auth()->user()->is_admin)
                         <a href="{{ route('dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
                     @elseif (auth()->guest())
@@ -42,7 +44,7 @@
                 </div>
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div>
-                    <div class="flex justify-center">
+                    <div class="flex justify-center text-2xl pb-6">
                         <h1>List of books for non-admins : (</h1>
                     </div>
                     <div>
