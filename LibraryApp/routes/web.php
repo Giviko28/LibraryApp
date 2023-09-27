@@ -23,38 +23,21 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard/books', [BookController::class, 'index'])
-    ->middleware(['admin'])
-    ->name('dashboard');
-
-Route::get('/dashboard/books/{book}/edit', [BookController::class, 'edit'])
-    ->middleware(['admin'])
-    ->name('books.edit');
-
-Route::patch('/dashboard/books/{book}', [BookController::class, 'update'])
-    ->middleware(['admin'])
-    ->name('books.update');
-
-Route::delete('/dashboard/books/{book}', [BookController::class, 'destroy'])
-    ->middleware(['admin'])
-    ->name('books.destroy');
+Route::group(['middleware' => 'admin', 'prefix' => '/dashboard'], function() {
+    Route::get('/books', [BookController::class, 'index'])->name('dashboard');
+    Route::get('/books/{book}/edit', [BookController::class, 'edit'])->name('books.edit');
+    Route::post('/books/create', [BookController::class, 'create'])->name('books.create');
+    Route::patch('/books/{book}', [BookController::class, 'update'])->name('books.update');
+    Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.destroy');
 
 
-Route::get('/dashboard/authors', [AuthorController::class, 'index'])
-    ->middleware(['admin'])
-    ->name('authors');
+    Route::get('/authors', [AuthorController::class, 'index'])->name('authors');
+    Route::get('/authors/{author}', [AuthorController::class, 'show'])->name('authors.show');
+    Route::post('/authors/create', [AuthorController::class, 'create'])->name('authors.create');
 
-Route::get('/dashboard/authors/{author}', [AuthorController::class, 'show'])
-    ->middleware(['admin'])
-    ->name('authors.show');
-
-Route::post('/dashboard/authors/create', [AuthorController::class, 'create'])
-    ->middleware(['admin'])
-    ->name('authors.create');
+});
 
 
-Route::post('/dashboard/books/create', [BookController::class, 'create'])
-    ->middleware(['admin']);
 //Route::get('/dashboard', function () {
 //    return view('dashboard', [
 //        'books' => Book::all()

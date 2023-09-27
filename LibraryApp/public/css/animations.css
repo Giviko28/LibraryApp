@@ -12,3 +12,16 @@
         opacity: 0;
     }
 }
+
+.books-table, .book-update, .author-create, .authors-table {
+    animation: showup 0.25s ease-out;
+}
+
+@keyframes showup {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}

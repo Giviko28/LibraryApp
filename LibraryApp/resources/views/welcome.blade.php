@@ -26,42 +26,36 @@
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 sm:items-center py-4 sm:pt-0">
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @if (auth()->user() && auth()->user()->is_admin)
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                        <a href="{{ route('dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
                     @elseif (auth()->guest())
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
                         <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
                     @else
-                        <p>Welcome back {{ auth()->user()->name }}</p>
+                        <div class="flex space-x-4">
+                            <p>Welcome back {{ auth()->user()->name }}</p>
+                            <form class="flex justify-center" method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="text-sm text-gray-700 dark:text-gray-500 underline bg-transparent bg-gray-100 cursor-pointer">Logout</button>
+                            </form>
+                        </div>
                     @endif
                 </div>
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div>
                     <div class="flex justify-center">
-                        <h1>List of books</h1>
+                        <h1>List of books for non-admins : (</h1>
                     </div>
                     <div>
-                        <table class="table-auto">
-                            <thead>
-                            <tr>
-                                <th>Book</th>
-                                <th>Authors</th>
-                                <th>Release Date</th>
-                                <th>Available</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @if($books)
-                                @foreach($books as $book)
-                                    <tr>
-                                        <td>{{ $book->title }}</td>
-                                        <td>{{ $book->authors }}</td>
-                                        <td>{{ $book->release_date }}</td>
-                                        <td>{{ $book->is_available ? "Yes" : "No" }}</td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                            </tbody>
-                        </table>
+                        <x-table>
+                            <x-slot name="thead">
+                                <x-table-header>Title</x-table-header>
+                                <x-table-header>Authors</x-table-header>
+                                <x-table-header>Release date</x-table-header>
+                            </x-slot>
+                                <x-table-data>Goat And Gigo</x-table-data>
+                                <x-table-data>Yakub Gogeb</x-table-data>
+                                <x-table-data>1872</x-table-data>
+                        </x-table>
                     </div>
                 </div>
             </div>

@@ -4,7 +4,7 @@
     <!-- main  -->
     <div x-data="{ open: false }" class="w-full flex justify-center hidden" id="main">
         <!-- Magida -->
-        <div x-show="!open" class="max-w-6xl py-4">
+        <div x-show="!open" class="max-w-6xl py-4 authors-table">
             <div class="p-4 bg-gray-50  relative overflow-x-auto shadow-md sm:rounded-lg">
                 <div class="dark:bg-gray-900 flex justify-between items-center space-x-4">
                     <label for="table-search" class="sr-only">Search</label>
@@ -41,7 +41,7 @@
             </div>
         </div>
         <!-- Forma -->
-        <div x-show="open" class="my-4 p-4 bg-white rounded">
+        <div x-show="open" class="my-4 p-4 bg-white rounded author-create">
             <div class="pb-2">
                 <img x-on:click="open = !open" src="{{ asset("png/arrow.png") }}" alt="Arrow icon" class="cursor-pointer">
             </div>

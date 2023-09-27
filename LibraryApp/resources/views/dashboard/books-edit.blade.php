@@ -7,17 +7,9 @@
                 <a href="{{ route('dashboard') }}"><img src="{{ asset("png/arrow.png") }}" alt="Arrow icon" class="cursor-pointer"></a>
                 <button type="button" id="add_author" class="">Add author</button>
             </div>
-            <div>
-                @if ($errors->any())
-                    <div>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-            </div>
+
+            <x-error-message/>
+
             <form  id="book-update" action="{{ route('books.update', ['book' => $book]) }}" method="POST" class="space-y-2">
                 @csrf
                 @method('PATCH')
