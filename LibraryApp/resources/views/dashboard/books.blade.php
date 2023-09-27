@@ -41,7 +41,7 @@
                                     @endforeach
                                 </x-table-data>
                                 <x-table-data>{{ $book->release_date }}</x-table-data>
-                                <x-table-data>{{ $book->status ? "Yes" : "No" }}</x-table-data>
+                                <x-table-data class="{{ $book->status ? 'text-green-500' : 'text-red-600' }}">{{ $book->status ? "Yes" : "No" }}</x-table-data>
                                 <x-table-data class="flex space-x-2">
                                     <a href="{{ route('books.edit', ['book' => $book]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                                     <form method="POST" action="{{ route('books.destroy', ['book' => $book]) }}">
@@ -76,19 +76,21 @@
             </div>
             <form action="/dashboard/books/create" method="POST" class="space-y-2">
                 @csrf
-                <x-text-input name="title" class="block" placeholder="Enter the book title" />
-                <x-text-input type="number" name="release_date" class="block" placeholder="Release date" />
+                <x-text-input name="title" class="block w-full" placeholder="Enter the book title" />
+                <x-text-input type="number" name="release_date" class="block w-full" placeholder="Release date" />
                 <div id="authors">
                     <div id="authorList" class="flex">
-                        <select name="authors[]" class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                        <select name="authors[]" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                             @foreach($authors as $author)
                                 <option value="{{ $author->id }}">{{ $author->name }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-                <x-toggle-switch isChecked="{{ false }}">Is the book still available?</x-toggle-switch>
-                <button type="submit" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                <x-toggle-switch isChecked="{{ false }}">Is the book available?</x-toggle-switch>
+                <div class="w-full flex justify-center">
+                    <button type="submit" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                </div>
             </form>
         </div>
     </div>

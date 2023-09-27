@@ -22,38 +22,22 @@
                 </div>
             </div>
             <div>
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            ID
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Name
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Action
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <x-table>
+                    <x-slot name="thead">
+                        <x-table-header>ID</x-table-header>
+                        <x-table-header>Name</x-table-header>
+                        <x-table-header>Action</x-table-header>
+                    </x-slot>
                     @if($authors)
                         @foreach($authors as $author)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $author->id }}
-                                </th>
-                                <td class="px-6 py-4">
-                                    {{ $author->name }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                </td>
+                                <x-table-data scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $author->id }}</x-table-data>
+                                <x-table-data>{{ $author->name }}</x-table-data>
+                                <x-table-data><a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a></x-table-data>
                             </tr>
                         @endforeach
                     @endif
-                    </tbody>
-                </table>
+                </x-table>
             </div>
         </div>
         <!-- Forma -->

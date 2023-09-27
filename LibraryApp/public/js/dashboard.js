@@ -11,7 +11,7 @@ let selectCount = 1;
 
 const authorCount = document.querySelectorAll('#oldAuthors').length;
 
-for(let i = 1; i<authorCount; i++) {
+for(let i = 1; i<=authorCount; i++) {
     const selector = `#select${i}`;
     const button = document.querySelector(selector);
     button.addEventListener('click', () => {
@@ -30,8 +30,8 @@ document.getElementById("add_author").addEventListener("click", function () {
 
     const deleteButton = document.createElement("button");
     deleteButton.type = "button";
-    deleteButton.textContent = "X";
-    deleteButton.className = 'pl-8';
+    deleteButton.textContent = "Delete";
+    deleteButton.className = 'pl-4 text-red-600';
     deleteButton.addEventListener("click", function () {
         newAuthorDiv.remove();
     });

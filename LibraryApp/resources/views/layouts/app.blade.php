@@ -10,7 +10,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        
+        <link rel="stylesheet" href="{{ asset('css/animations.css') }}">
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
         <script defer src="{{ asset("js/dashboard.js") }}"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -36,5 +36,6 @@
                 {{ $slot }}
             </main>
         </div>
+    <x-flash-message message="{{ session('message') ?? null }}"/>
     </body>
 </html>

@@ -1,7 +1,7 @@
 @props(['book', 'authors'])
 
 <x-app-layout>
-    <div class="flex justify-center">
+    <div id="main" class="flex justify-center hidden">
         <div class="max-w-2xl my-4 p-4 bg-white rounded">
             <div class="pb-2 flex justify-between">
                 <a href="{{ route('dashboard') }}"><img src="{{ asset("png/arrow.png") }}" alt="Arrow icon" class="cursor-pointer"></a>
@@ -32,7 +32,7 @@
                                     <option value="{{ $allAuthors->id }}">{{ $allAuthors->name }}</option>
                                 @endforeach
                             </select>
-                            <button class="pl-4" type="button" id="select{{ $index+1 }}">Delete</button>
+                            <button class="pl-4 text-red-600" type="button" id="select{{ $index+1 }}">Delete</button>
                         </div>
                     @endforeach
                     <div id="authorList" class="flex">

@@ -1,0 +1,14 @@
+.flash-message {
+    animation: flash 5s ease-out;
+}
+@keyframes flash {
+    0% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
