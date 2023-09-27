@@ -25,14 +25,13 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make("Admin1"),
             'is_admin' => 1,
         ]);
-        Book::factory(10)->create();
         Author::factory(10)->create();
-        DB::table('book_author')->insert([
-            ['book_id' => 1, 'author_id' => 1],
-            ['book_id' => 1, 'author_id' => 3],
-            ['book_id' => 1, 'author_id' => 4],
-            ['book_id' => 1, 'author_id' => 2],
-            ['book_id' => 2, 'author_id' => 1]
-        ]);
+        Book::factory(10)->create();
+        // I know, I could've made this a lot better
+        for($i = 1; $i<=10; $i++) {
+            DB::table('book_author')->insert([
+                ['book_id' => $i, 'author_id' => $i],
+            ]);
+        }
     }
 }
