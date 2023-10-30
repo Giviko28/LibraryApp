@@ -1,6 +1,6 @@
 # LibraryApp
  An app to keep track of books. Made specifically for an internship.
- Built on Laravel using blade templates, alpine and tailwind.
+ Built on Laravel using blade templates, alpine.js and tailwind.
 
  # How it works
  This website is meant for "library" admins only. hence the only page that's functional is the dashboard.
