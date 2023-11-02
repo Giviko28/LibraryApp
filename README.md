@@ -10,7 +10,7 @@
  
 ## Steps to setup the project
 
-1) After cloning the repository, cd into LibraryApp and run composer install => php artisan migrate (Make sure to copy .env.example)
+1) After cloning the repository, cd into LibraryApp and run composer install => php artisan migrate (Make sure to copy .env.example).
 2) Seed the database (php artisan db:seed)
 3) Inside the terminal write npm install
 4) then npm run dev
